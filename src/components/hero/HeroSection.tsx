@@ -49,7 +49,7 @@ export function HeroSection() {
         poster="/brand/strafe-emblem.png"
         aria-label="STRAFE drone promotional orbit"
       >
-        <source src="/video/strafe-hero-loop.mp4" type="video/mp4" />
+        <source src="/video/strafe-hero-loop.mp4?v=3" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/30" />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />

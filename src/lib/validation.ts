@@ -1,11 +1,6 @@
 import { z } from "zod";
 
-const theaterEnum = z.enum([
-  "eastern-europe",
-  "levant",
-  "sudan",
-  "myanmar",
-]);
+const theaterEnum = z.enum(["eastern-europe", "levant", "africa", "asia"]);
 const sideEnum = z.enum([
   "ukraine",
   "russia",

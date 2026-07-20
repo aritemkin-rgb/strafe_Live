@@ -1,4 +1,4 @@
-export type TheaterId = "eastern-europe" | "levant" | "sudan" | "myanmar";
+export type TheaterId = "eastern-europe" | "levant" | "africa" | "asia";
 export type SideId =
   | "ukraine"
   | "russia"
@@ -82,8 +82,8 @@ export const THEATERS: Theater[] = [
     ],
   },
   {
-    id: "sudan",
-    name: "Sudan",
+    id: "africa",
+    name: "Africa",
     center: [30.2, 15.5],
     zoom: 5.2,
     factions: [
@@ -93,7 +93,7 @@ export const THEATERS: Theater[] = [
         flagSrc: "/flags/sd.svg",
         countryIds: ["729"],
         status: "HIGH DEMAND",
-        activity: "SUDANESE ARMED FORCES",
+        activity: "SUDAN · SUDANESE ARMED FORCES",
         cta: "SELECT SAF",
       },
       {
@@ -102,14 +102,14 @@ export const THEATERS: Theater[] = [
         flagSrc: "/flags/sd.svg",
         countryIds: ["729"],
         status: "TRENDING",
-        activity: "RAPID SUPPORT FORCES",
+        activity: "SUDAN · RAPID SUPPORT FORCES",
         cta: "SELECT RSF",
       },
     ],
   },
   {
-    id: "myanmar",
-    name: "Myanmar",
+    id: "asia",
+    name: "Asia",
     center: [96.1, 21.9],
     zoom: 5.4,
     factions: [
@@ -119,7 +119,7 @@ export const THEATERS: Theater[] = [
         flagSrc: "/flags/mm.svg",
         countryIds: ["104"],
         status: "LIMITED BETA",
-        activity: "MILITARY JUNTA",
+        activity: "MYANMAR · MILITARY JUNTA",
         cta: "SELECT JUNTA",
       },
       {
@@ -128,7 +128,7 @@ export const THEATERS: Theater[] = [
         flagSrc: "/flags/mm.svg",
         countryIds: ["104"],
         status: "HIGH DEMAND",
-        activity: "PEOPLE'S DEFENSE FORCES",
+        activity: "MYANMAR · PEOPLE'S DEFENSE FORCES",
         cta: "SELECT RESISTANCE",
       },
     ],

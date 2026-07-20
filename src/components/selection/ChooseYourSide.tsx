@@ -25,6 +25,15 @@ export function ChooseYourSide() {
 
   const onPickTheater = (id: TheaterId) => {
     setTheater(id);
+    // Clear a side that doesn't belong to the newly selected theater.
+    const next = THEATERS.find((t) => t.id === id);
+    if (sideId && sideId !== "no-preference") {
+      const stillValid = next?.factions.some((f) => f.id === sideId);
+      if (!stillValid) {
+        clearSelection();
+        setPanelOpen(false);
+      }
+    }
   };
 
   const onPickSide = async (side: SideId, theater: TheaterId | null) => {

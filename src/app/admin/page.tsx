@@ -105,8 +105,8 @@ export default function AdminPage() {
       value: stats.theaterCounts["eastern-europe"] ?? 0,
     },
     { label: "LEVANT TOTAL", value: stats.theaterCounts.levant ?? 0 },
-    { label: "SUDAN TOTAL", value: stats.theaterCounts.sudan ?? 0 },
-    { label: "MYANMAR TOTAL", value: stats.theaterCounts.myanmar ?? 0 },
+    { label: "AFRICA TOTAL", value: stats.theaterCounts.africa ?? 0 },
+    { label: "ASIA TOTAL", value: stats.theaterCounts.asia ?? 0 },
   ];
 
   return (

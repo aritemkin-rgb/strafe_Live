@@ -77,8 +77,8 @@ export async function getLocalStats() {
   const theaterCounts: Record<string, number> = {
     "eastern-europe": 0,
     levant: 0,
-    sudan: 0,
-    myanmar: 0,
+    africa: 0,
+    asia: 0,
   };
 
   const signupBySide: Record<string, number> = {
