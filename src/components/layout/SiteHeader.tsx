@@ -60,6 +60,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-[11px] tracking-[0.2em] text-white">
+            <span className="live-dot" />
+            LIVE
+          </div>
           <button
             type="button"
             onClick={() => openAccessModal("nav")}
