@@ -4,7 +4,6 @@ import { LiveStreamPreview } from "@/components/stream/LiveStreamPreview";
 import { HowItWorks } from "@/components/platform/HowItWorks";
 import { GearSection } from "@/components/gear/GearSection";
 import { BetaSection } from "@/components/waitlist/BetaSection";
-import { FounderPlaceholder } from "@/components/founder/FounderPlaceholder";
 
 export default function HomePage() {
   return (
@@ -15,7 +14,6 @@ export default function HomePage() {
       <HowItWorks />
       <GearSection />
       <BetaSection />
-      <FounderPlaceholder />
     </>
   );
 }

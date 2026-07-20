@@ -11,7 +11,6 @@ const LINKS = [
   { href: "#theaters", label: "THEATERS" },
   { href: "#gear", label: "GEAR" },
   { href: "#live", label: "LIVE" },
-  { href: "#commander", label: "COMMANDER" },
   { href: "/about", label: "ABOUT" },
 ];
 
@@ -35,8 +34,11 @@ export function SiteHeader() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="relative h-8 w-[140px] shrink-0 sm:h-9 sm:w-[180px]">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          className="relative h-12 w-[200px] shrink-0 sm:h-14 sm:w-[260px]"
+        >
           <Image
             src="/brand/strafe-live-logo.png"
             alt="STRAFE.LIVE"

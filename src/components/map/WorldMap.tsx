@@ -23,7 +23,6 @@ export function WorldMap({
   activeTheater,
   hoveredSide,
   selectedSide,
-  onSelectTheater,
   focusMode = false,
   children,
 }: WorldMapProps) {
@@ -123,22 +122,8 @@ export function WorldMap({
           );
         })}
 
-        {/* Only show markers for inactive theaters so the active region stays clean for side pickers */}
-        {THEATERS.filter((t) => t.id !== activeTheater).map((t) => {
-          const [x, y] = projection(t.center) ?? [0, 0];
-          if (x < 20 || x > width - 20 || y < 20 || y > height - 20) return null;
-          return (
-            <g
-              key={t.id}
-              transform={`translate(${x}, ${y})`}
-              className="cursor-pointer"
-              onClick={() => onSelectTheater(t.id)}
-            >
-              <circle r={6} fill="none" stroke="#EF4444" strokeWidth={1.2} />
-              <circle r={2.5} fill="#EF4444" />
-            </g>
-          );
-        })}
+        {/* Region switching is handled by the theater buttons above the map.
+            Hide leftover markers so zoomed theaters (e.g. Africa) stay clean. */}
       </svg>
 
       {!countries ? (
