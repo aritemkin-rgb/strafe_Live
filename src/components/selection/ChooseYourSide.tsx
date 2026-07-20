@@ -25,7 +25,6 @@ export function ChooseYourSide() {
 
   const onPickTheater = (id: TheaterId) => {
     setTheater(id);
-    // Clear a side that doesn't belong to the newly selected theater.
     const next = THEATERS.find((t) => t.id === id);
     if (sideId && sideId !== "no-preference") {
       const stillValid = next?.factions.some((f) => f.id === sideId);
@@ -52,7 +51,7 @@ export function ChooseYourSide() {
             CHOOSE YOUR SIDE
           </h2>
           <p className="mt-4 text-[#B5B5BB]">
-            Select a theater. Choose an allegiance. Join the first wave.
+            Select a theater. Choose an allegiance directly on the map.
           </p>
         </div>
 
@@ -74,78 +73,109 @@ export function ChooseYourSide() {
         </div>
 
         <div
-          className={`grid gap-6 ${panelOpen ? "lg:grid-cols-[1.2fr_0.8fr]" : "grid-cols-1"}`}
+          className={`grid gap-6 ${panelOpen ? "lg:grid-cols-[1.25fr_0.75fr]" : "grid-cols-1"}`}
         >
-          <motion.div layout className="space-y-6">
+          <motion.div layout>
             <WorldMap
               activeTheater={activeTheater.id}
               hoveredSide={hoveredSide}
               selectedSide={sideId}
               onSelectTheater={onPickTheater}
               focusMode={panelOpen}
-            />
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {activeTheater.factions.map((faction) => {
-                const selected = sideId === faction.id;
-                const dimmed =
-                  Boolean(hoveredSide || sideId) &&
-                  hoveredSide !== faction.id &&
-                  sideId !== faction.id;
-                return (
-                  <button
-                    key={faction.id}
-                    type="button"
-                    onMouseEnter={() => setHoveredSide(faction.id)}
-                    onMouseLeave={() => setHoveredSide(null)}
-                    onClick={() => onPickSide(faction.id, activeTheater.id)}
-                    className={`group rounded-sm border p-4 text-left transition ${
-                      selected
-                        ? "border-[#EF4444] bg-[#EF4444]/10"
-                        : "border-white/10 bg-[#0C0C0D] hover:border-white/30"
-                    } ${dimmed ? "opacity-45" : "opacity-100"}`}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <Image
-                        src={faction.flagSrc}
-                        alt={`${faction.name} flag`}
-                        width={64}
-                        height={42}
-                        className="h-10 w-auto border border-white/10 shadow-lg"
-                      />
-                      <span className="font-mono text-[10px] tracking-[0.16em] text-[#EF4444]">
-                        {faction.status}
-                      </span>
-                    </div>
-                    <h3 className="mt-4 font-display text-2xl text-white">
-                      {faction.name.toUpperCase()}
-                    </h3>
-                    <p className="mt-2 font-mono text-[10px] tracking-[0.16em] text-[#83838A]">
-                      {faction.activity}
-                    </p>
-                    <p className="mt-4 text-xs tracking-[0.18em] text-white group-hover:text-[#EF4444]">
-                      {faction.cta}
-                    </p>
-                  </button>
-                );
-              })}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onPickSide("no-preference", null)}
-              className="w-full rounded-sm border border-dashed border-white/20 bg-transparent p-4 text-left transition hover:border-white/40"
             >
-              <p className="font-mono text-[10px] tracking-[0.2em] text-[#83838A]">
-                {NO_PREFERENCE.label}
-              </p>
-              <h3 className="mt-2 font-display text-xl text-white">
-                {NO_PREFERENCE.name.toUpperCase()}
-              </h3>
-              <p className="mt-2 max-w-xl text-sm text-[#B5B5BB]">
-                {NO_PREFERENCE.description}
-              </p>
-            </button>
+              {/* Side selection lives ON the map */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/85 to-transparent pt-16 sm:pt-24">
+                <div className="pointer-events-auto px-3 pb-3 sm:px-4 sm:pb-4">
+                  <div className="mb-2 flex items-center justify-between gap-3">
+                    <p className="font-mono text-[10px] tracking-[0.22em] text-[#EF4444]">
+                      {activeTheater.name.toUpperCase()} · SELECT ALLEGIANCE
+                    </p>
+                    <p className="hidden font-mono text-[10px] tracking-[0.16em] text-[#83838A] sm:block">
+                      TAP A FLAG TO LOCK SIDE
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-[1fr_auto_1fr] sm:items-stretch">
+                    {activeTheater.factions.map((faction, index) => {
+                      const selected = sideId === faction.id;
+                      const dimmed =
+                        Boolean(hoveredSide || sideId) &&
+                        hoveredSide !== faction.id &&
+                        sideId !== faction.id;
+
+                      return (
+                        <div key={faction.id} className="contents">
+                          {index === 1 ? (
+                            <div className="hidden items-center justify-center sm:flex">
+                              <span className="font-display text-2xl text-white/40">
+                                VS
+                              </span>
+                            </div>
+                          ) : null}
+                          <button
+                            type="button"
+                            onMouseEnter={() => setHoveredSide(faction.id)}
+                            onMouseLeave={() => setHoveredSide(null)}
+                            onClick={() =>
+                              onPickSide(faction.id, activeTheater.id)
+                            }
+                            className={`group flex items-center gap-3 rounded-sm border p-3 text-left backdrop-blur-md transition sm:p-4 ${
+                              selected
+                                ? "border-[#EF4444] bg-[#EF4444]/20"
+                                : "border-white/15 bg-black/55 hover:border-white/40"
+                            } ${dimmed ? "opacity-45" : "opacity-100"}`}
+                          >
+                            <Image
+                              src={faction.flagSrc}
+                              alt={`${faction.name} flag`}
+                              width={72}
+                              height={48}
+                              className="h-11 w-auto shrink-0 border border-white/15 shadow-lg sm:h-12"
+                            />
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center justify-between gap-2">
+                                <h3 className="font-display text-xl text-white sm:text-2xl">
+                                  {faction.name.toUpperCase()}
+                                </h3>
+                                <span className="shrink-0 font-mono text-[9px] tracking-[0.14em] text-[#EF4444]">
+                                  {faction.status}
+                                </span>
+                              </div>
+                              <p className="mt-1 truncate font-mono text-[10px] tracking-[0.12em] text-[#B5B5BB]">
+                                {faction.activity}
+                              </p>
+                              <p className="mt-2 text-[10px] tracking-[0.16em] text-white group-hover:text-[#EF4444]">
+                                {faction.cta}
+                              </p>
+                            </div>
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => onPickSide("no-preference", null)}
+                    className="mt-2 w-full rounded-sm border border-dashed border-white/20 bg-black/40 px-3 py-2 text-left backdrop-blur-sm transition hover:border-white/40"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div>
+                        <p className="font-mono text-[9px] tracking-[0.18em] text-[#83838A]">
+                          {NO_PREFERENCE.label}
+                        </p>
+                        <p className="font-display text-sm text-white">
+                          {NO_PREFERENCE.name.toUpperCase()}
+                        </p>
+                      </div>
+                      <p className="max-w-md text-[11px] text-[#B5B5BB]">
+                        {NO_PREFERENCE.description}
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </WorldMap>
           </motion.div>
 
           <AnimatePresence>

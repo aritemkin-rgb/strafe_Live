@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { geoMercator, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import type { FeatureCollection, Geometry } from "geojson";
@@ -14,6 +14,7 @@ interface WorldMapProps {
   selectedSide: SideId | null;
   onSelectTheater: (id: TheaterId) => void;
   focusMode?: boolean;
+  children?: ReactNode;
 }
 
 type CountryProps = { name?: string };
@@ -24,6 +25,7 @@ export function WorldMap({
   selectedSide,
   onSelectTheater,
   focusMode = false,
+  children,
 }: WorldMapProps) {
   const [countries, setCountries] = useState<
     FeatureCollection<Geometry, CountryProps> | null
@@ -49,23 +51,20 @@ export function WorldMap({
 
   const theater = THEATERS.find((t) => t.id === activeTheater) ?? null;
   const width = 960;
-  const height = 480;
+  const height = 520;
 
   const projection = useMemo(() => {
     const p = geoMercator().precision(0.1);
-    if (theater && focusMode) {
-      return p.center(theater.center).scale(140 * theater.zoom).translate([
-        width * (focusMode ? 0.38 : 0.5),
-        height * 0.5,
-      ]);
-    }
     if (theater) {
-      return p.center(theater.center).scale(110 * theater.zoom).translate([
-        width / 2,
-        height / 2,
-      ]);
+      // Leave room on the right when signup panel is open; leave bottom for faction overlay.
+      const tx = focusMode ? width * 0.42 : width * 0.5;
+      const ty = height * 0.42;
+      return p
+        .center(theater.center)
+        .scale(120 * theater.zoom)
+        .translate([tx, ty]);
     }
-    return p.scale(140).translate([width / 2, height / 1.45]);
+    return p.scale(140).translate([width / 2, height / 1.55]);
   }, [theater, focusMode]);
 
   const path = useMemo(() => geoPath(projection), [projection]);
@@ -108,7 +107,7 @@ export function WorldMap({
           );
           let fill = "#1a1a1c";
           let opacity = 1;
-          if (theater && !inActiveTheater && !isHighlight) opacity = 0.35;
+          if (theater && !inActiveTheater && !isHighlight) opacity = 0.28;
           if (dimOpponent && !isHighlight && inActiveTheater) opacity = 0.45;
           if (isHighlight) fill = "#3f1515";
           return (
@@ -124,9 +123,10 @@ export function WorldMap({
           );
         })}
 
-        {THEATERS.map((t) => {
+        {/* Only show markers for inactive theaters so the active region stays clean for side pickers */}
+        {THEATERS.filter((t) => t.id !== activeTheater).map((t) => {
           const [x, y] = projection(t.center) ?? [0, 0];
-          const active = activeTheater === t.id;
+          if (x < 20 || x > width - 20 || y < 20 || y > height - 20) return null;
           return (
             <g
               key={t.id}
@@ -134,33 +134,20 @@ export function WorldMap({
               className="cursor-pointer"
               onClick={() => onSelectTheater(t.id)}
             >
-              <circle
-                r={active ? 10 : 7}
-                fill="none"
-                stroke="#EF4444"
-                strokeWidth={1.5}
-                className={active ? "animate-pulse" : undefined}
-              />
-              <circle r={3} fill="#EF4444" />
-              <text
-                y={-16}
-                textAnchor="middle"
-                fill="#F7F7F7"
-                fontSize="11"
-                letterSpacing="1.5"
-                style={{ fontFamily: "var(--font-ibm-plex-mono), monospace" }}
-              >
-                {t.name.toUpperCase()}
-              </text>
+              <circle r={6} fill="none" stroke="#EF4444" strokeWidth={1.2} />
+              <circle r={2.5} fill="#EF4444" />
             </g>
           );
         })}
       </svg>
+
       {!countries ? (
         <div className="absolute inset-0 flex items-center justify-center font-mono text-xs tracking-[0.2em] text-[#83838A]">
           LOADING GEOGRAPHY…
         </div>
       ) : null}
+
+      {children}
     </div>
   );
 }
