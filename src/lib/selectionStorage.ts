@@ -122,6 +122,19 @@ export async function getLocalStats() {
     theaterCounts,
     signupBySide,
     signupsByDay,
+    signups: waitlist
+      .slice()
+      .sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
+      .map((row) => ({
+        id: row.id,
+        email: row.email,
+        name: row.name || row.callsign || "",
+        callsign: row.callsign || "",
+        selectedSide: row.selectedSide ?? null,
+        selectedTheater: row.selectedTheater ?? null,
+        source: row.source ?? "homepage",
+        createdAt: row.created_at,
+      })),
     storage: "local" as const,
   };
 }

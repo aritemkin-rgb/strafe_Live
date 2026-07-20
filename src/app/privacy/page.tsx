@@ -10,9 +10,9 @@ export default function PrivacyPage() {
       <h1 className="font-display text-4xl text-white">Privacy</h1>
       <div className="mt-8 space-y-4 text-sm leading-relaxed text-[#B5B5BB]">
         <p>
-          If you join the waitlist, we store the email address and optional
-          callsign you submit so we can contact you about fictional private-beta
-          access for this artwork.
+          If you join the waitlist, we store the email address, optional name,
+          and optional callsign you submit so we can contact you about
+          private-beta access.
         </p>
         <p>
           Side-selection analytics are stored as anonymous aggregate events. We

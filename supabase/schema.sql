@@ -4,11 +4,19 @@
 create table if not exists public.waitlist_signups (
   id uuid primary key default gen_random_uuid(),
   email text not null,
+  name text,
   callsign text,
   marketing_consent boolean not null default false,
   source text,
+  selected_theater text,
+  selected_side text,
   created_at timestamptz not null default now()
 );
+
+-- Safe upgrades for existing projects
+alter table public.waitlist_signups add column if not exists name text;
+alter table public.waitlist_signups add column if not exists selected_theater text;
+alter table public.waitlist_signups add column if not exists selected_side text;
 
 create unique index if not exists waitlist_signups_email_idx
   on public.waitlist_signups (lower(email));

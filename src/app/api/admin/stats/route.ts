@@ -23,7 +23,10 @@ export async function GET() {
 
   const { data: waitlist } = await supabase
     .from("waitlist_signups")
-    .select("created_at");
+    .select(
+      "id, email, name, callsign, source, selected_theater, selected_side, created_at",
+    )
+    .order("created_at", { ascending: false });
   const { data: selections } = await supabase
     .from("side_selection_events")
     .select("selected_theater, selected_side, event_type, created_at");
@@ -86,6 +89,16 @@ export async function GET() {
     theaterCounts,
     signupBySide,
     signupsByDay,
+    signups: (waitlist ?? []).map((row) => ({
+      id: row.id,
+      email: row.email,
+      name: row.name || row.callsign || "",
+      callsign: row.callsign || "",
+      selectedSide: row.selected_side ?? null,
+      selectedTheater: row.selected_theater ?? null,
+      source: row.source ?? "homepage",
+      createdAt: row.created_at,
+    })),
     storage: "supabase",
   });
 }

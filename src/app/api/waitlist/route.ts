@@ -24,9 +24,12 @@ export async function POST(request: Request) {
       if (supabase) {
         const { error } = await supabase.from("waitlist_signups").insert({
           email: data.email.toLowerCase(),
-          callsign: data.callsign || null,
+          name: data.name || data.callsign || null,
+          callsign: data.callsign || data.name || null,
           marketing_consent: data.marketingConsent ?? false,
           source: data.source ?? "homepage",
+          selected_theater: data.selectedTheater ?? null,
+          selected_side: data.selectedSide ?? null,
         });
 
         if (error) {

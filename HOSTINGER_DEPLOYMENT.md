@@ -8,7 +8,8 @@ This project is a **Next.js Node app** (not a static export). Hostinger must run
 2. Push this repository to GitHub.
 3. Create a free Supabase project (optional but recommended for production emails/analytics).
 4. Run `supabase/schema.sql` in the Supabase SQL editor.
-5. Decide an `ADMIN_PASSWORD`.
+5. Decide an `ADMIN_PASSWORD` (any password you choose — this is not generated for you).
+   Example: `strafe-admin-2026`. Put that same value in Hostinger env vars.
 
 ## Hostinger steps
 

@@ -15,6 +15,7 @@ const sideEnum = z.enum([
 
 export const waitlistSchema = z.object({
   email: z.string().email("Enter a valid email address"),
+  name: z.string().max(80).optional().or(z.literal("")),
   callsign: z.string().max(40).optional().or(z.literal("")),
   marketingConsent: z.boolean().optional().default(false),
   selectedTheater: theaterEnum.nullable().optional(),

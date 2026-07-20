@@ -11,6 +11,7 @@ import { formatQueuePosition } from "@/lib/queueNumber";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email"),
+  name: z.string().max(80).optional(),
   callsign: z.string().max(40).optional(),
 });
 
@@ -60,7 +61,8 @@ export function WaitlistForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: values.email,
-          callsign: values.callsign ?? "",
+          name: values.name ?? "",
+          callsign: values.callsign ?? values.name ?? "",
           selectedTheater: theaterId,
           selectedSide: sideId,
           source,
@@ -77,7 +79,7 @@ export function WaitlistForm({
       }
       await markSignupComplete({
         email: values.email,
-        callsign: values.callsign,
+        callsign: values.callsign || values.name,
         queuePosition: json.queuePosition,
       });
       setDone(true);
@@ -195,6 +197,19 @@ export function WaitlistForm({
         {errors.email ? (
           <span className="text-xs text-[#EF4444]">{errors.email.message}</span>
         ) : null}
+      </label>
+
+      <label className="block space-y-2">
+        <span className="font-mono text-[10px] tracking-[0.18em] text-[#83838A]">
+          NAME
+        </span>
+        <input
+          type="text"
+          autoComplete="name"
+          className="w-full rounded-sm border border-white/15 bg-black px-3 py-3 text-sm text-white outline-none ring-[#EF4444] placeholder:text-[#83838A] focus:ring-1"
+          placeholder="Your name"
+          {...register("name")}
+        />
       </label>
 
       <label className="block space-y-2">

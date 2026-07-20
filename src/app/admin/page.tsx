@@ -2,6 +2,17 @@
 
 import { FormEvent, useEffect, useState } from "react";
 
+interface SignupRow {
+  id: string;
+  email: string;
+  name: string;
+  callsign: string;
+  selectedSide: string | null;
+  selectedTheater: string | null;
+  source: string;
+  createdAt: string;
+}
+
 interface Stats {
   totalWaitlist: number;
   totalSelections: number;
@@ -9,6 +20,7 @@ interface Stats {
   theaterCounts: Record<string, number>;
   signupBySide: Record<string, number>;
   signupsByDay: Record<string, number>;
+  signups?: SignupRow[];
   storage: string;
 }
 
@@ -46,10 +58,45 @@ export default function AdminPage() {
       body: JSON.stringify({ password }),
     });
     if (!res.ok) {
-      setError("Unauthorized");
+      setError("Unauthorized — check ADMIN_PASSWORD in Hostinger env vars");
       return;
     }
     await loadStats();
+  };
+
+  const downloadCsv = () => {
+    if (!stats?.signups?.length) return;
+    const header = [
+      "created_at",
+      "email",
+      "name",
+      "callsign",
+      "theater",
+      "side",
+      "source",
+    ];
+    const lines = stats.signups.map((row) =>
+      [
+        row.createdAt,
+        row.email,
+        row.name,
+        row.callsign,
+        row.selectedTheater ?? "",
+        row.selectedSide ?? "",
+        row.source,
+      ]
+        .map((cell) => `"${String(cell).replaceAll('"', '""')}"`)
+        .join(","),
+    );
+    const blob = new Blob([[header.join(","), ...lines].join("\n")], {
+      type: "text/csv;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `strafe-waitlist-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   if (!authed) {
@@ -75,6 +122,11 @@ export default function AdminPage() {
             ENTER
           </button>
         </form>
+        <p className="mt-6 text-xs leading-relaxed text-[#83838A]">
+          Set this password in Hostinger → your Node app → Environment
+          variables → <code className="text-[#B5B5BB]">ADMIN_PASSWORD</code>,
+          then redeploy.
+        </p>
       </div>
     );
   }
@@ -111,13 +163,21 @@ export default function AdminPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-6">
-      <div className="flex items-end justify-between gap-4">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-display text-4xl text-white">Analytics</h1>
           <p className="mt-2 font-mono text-[11px] tracking-[0.16em] text-[#83838A]">
             STORAGE: {stats.storage.toUpperCase()}
           </p>
         </div>
+        <button
+          type="button"
+          onClick={downloadCsv}
+          disabled={!stats.signups?.length}
+          className="rounded-sm border border-white/15 px-4 py-2 text-[11px] tracking-[0.16em] text-white transition hover:border-white/40 disabled:opacity-40"
+        >
+          DOWNLOAD CSV
+        </button>
       </div>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -132,6 +192,51 @@ export default function AdminPage() {
             <p className="mt-3 font-display text-3xl text-white">{card.value}</p>
           </div>
         ))}
+      </div>
+
+      <div className="mt-10 overflow-hidden rounded-sm border border-white/10 bg-[#0C0C0D]">
+        <div className="border-b border-white/10 px-5 py-4">
+          <h2 className="font-mono text-[11px] tracking-[0.18em] text-[#B5B5BB]">
+            WAITLIST SIGNUPS
+          </h2>
+        </div>
+        {!stats.signups?.length ? (
+          <p className="px-5 py-6 text-sm text-[#83838A]">No signups yet.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead className="font-mono text-[10px] tracking-[0.14em] text-[#83838A]">
+                <tr className="border-b border-white/10">
+                  <th className="px-5 py-3 font-normal">WHEN</th>
+                  <th className="px-5 py-3 font-normal">EMAIL</th>
+                  <th className="px-5 py-3 font-normal">NAME</th>
+                  <th className="px-5 py-3 font-normal">SIDE</th>
+                  <th className="px-5 py-3 font-normal">SOURCE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.signups.map((row) => (
+                  <tr
+                    key={row.id}
+                    className="border-b border-white/5 text-[#B5B5BB]"
+                  >
+                    <td className="whitespace-nowrap px-5 py-3 text-xs">
+                      {new Date(row.createdAt).toLocaleString()}
+                    </td>
+                    <td className="px-5 py-3 text-white">{row.email}</td>
+                    <td className="px-5 py-3">
+                      {row.name || row.callsign || "—"}
+                    </td>
+                    <td className="px-5 py-3 uppercase">
+                      {row.selectedSide ?? "—"}
+                    </td>
+                    <td className="px-5 py-3">{row.source}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
@@ -174,9 +279,6 @@ export default function AdminPage() {
           </div>
         </div>
       </div>
-      <p className="mt-8 text-xs text-[#83838A]">
-        Email addresses are intentionally hidden on this dashboard.
-      </p>
     </div>
   );
 }
