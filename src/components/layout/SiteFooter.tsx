@@ -17,7 +17,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-14 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-md space-y-4">
-            <div className="relative h-10 w-[200px]">
+            <div className="relative h-12 w-[min(80vw,360px)] sm:h-14 sm:w-[420px]">
               <Image
                 src="/brand/strafe-live-logo.png"
                 alt="STRAFE.LIVE"

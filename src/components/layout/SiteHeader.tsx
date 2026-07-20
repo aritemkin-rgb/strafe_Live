@@ -34,10 +34,10 @@ export function SiteHeader() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="relative h-14 w-[210px] shrink-0 sm:h-14 sm:w-[260px]"
+          className="relative h-11 w-[min(72vw,320px)] shrink-0 sm:h-12 sm:w-[380px] lg:h-14 lg:w-[440px]"
         >
           <Image
             src="/brand/strafe-live-logo.png"
