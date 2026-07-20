@@ -10,7 +10,6 @@ const LINKS = [
   { href: "#platform", label: "PLATFORM" },
   { href: "#theaters", label: "THEATERS" },
   { href: "#gear", label: "GEAR" },
-  { href: "#live", label: "LIVE" },
   { href: "/about", label: "ABOUT" },
 ];
 
@@ -34,10 +33,10 @@ export function SiteHeader() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-24 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-28 max-w-7xl items-center justify-between gap-4 px-4 sm:h-32 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="relative h-11 w-[min(72vw,320px)] shrink-0 sm:h-12 sm:w-[380px] lg:h-14 lg:w-[440px]"
+          className="relative h-14 w-[min(78vw,380px)] shrink-0 sm:h-16 sm:w-[460px] lg:h-[4.5rem] lg:w-[520px]"
         >
           <Image
             src="/brand/strafe-live-logo.png"
@@ -61,10 +60,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-[11px] tracking-[0.2em] text-white">
-            <span className="live-dot" />
-            LIVE
-          </div>
           <button
             type="button"
             onClick={() => openAccessModal("nav")}

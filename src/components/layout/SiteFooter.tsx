@@ -5,7 +5,6 @@ const LINKS = [
   { href: "#platform", label: "PLATFORM" },
   { href: "#theaters", label: "THEATERS" },
   { href: "#gear", label: "GEAR" },
-  { href: "#live", label: "LIVE" },
   { href: "/about", label: "ABOUT" },
   { href: "/privacy", label: "PRIVACY" },
   { href: "/terms", label: "TERMS" },
