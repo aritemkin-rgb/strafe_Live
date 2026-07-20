@@ -12,7 +12,7 @@ const LINKS = [
   { href: "#gear", label: "GEAR" },
   { href: "#live", label: "LIVE" },
   { href: "#commander", label: "COMMANDER" },
-  { href: "#about", label: "ABOUT" },
+  { href: "/about", label: "ABOUT" },
 ];
 
 export function SiteHeader() {

@@ -37,7 +37,7 @@ export function BetaSection() {
               ))}
             </div>
             <p className="mt-4 text-[11px] text-[#83838A]">
-              Fictional product-status indicators.
+              Status updates in real time as capacity expands.
             </p>
           </div>
         </div>

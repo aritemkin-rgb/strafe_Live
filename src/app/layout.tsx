@@ -34,13 +34,13 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "STRAFE.LIVE — A Satirical Platform Artwork",
+  title: "STRAFE.LIVE — Join the Fight",
   description:
-    "STRAFE.LIVE is a fictional platform examining the gamification, platformization, and spectatorship of remote warfare.",
+    "STRAFE.LIVE is the civilian operator platform for remote access, real-time engagement, and mission-ready livestream operations.",
   openGraph: {
     title: "JOIN THE FIGHT",
     description:
-      "STRAFE.LIVE is a fictional platform examining the gamification, platformization, and spectatorship of remote warfare.",
+      "Choose your side. Choose your gear. Get the clip. Remote access. Real-time engagement.",
     url: "https://strafe.live",
     siteName: "STRAFE.LIVE",
     type: "website",

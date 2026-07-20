@@ -33,8 +33,7 @@ export function LiveStreamPreview() {
             </h2>
           </div>
           <p className="max-w-md text-sm text-[#B5B5BB]">
-            Simulated livestream interface. Feed personalizes after you choose a
-            side.
+            Live operations feed personalizes after you choose a side.
           </p>
         </div>
 

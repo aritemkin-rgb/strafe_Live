@@ -8,7 +8,6 @@ const LINKS = [
   { href: "#live", label: "LIVE" },
   { href: "#commander", label: "COMMANDER" },
   { href: "/about", label: "ABOUT" },
-  { href: "/disclosure", label: "DISCLOSURE" },
   { href: "/privacy", label: "PRIVACY" },
   { href: "/terms", label: "TERMS" },
 ];
@@ -46,7 +45,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-2 border-t border-white/10 pt-6 text-[11px] tracking-[0.14em] text-[#83838A] sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 STRAFE.LIVE</span>
           <span>A GENERAL.MANN COMPANY</span>
-          <span className="text-[#EF4444]">ALL SYSTEMS FICTIONAL</span>
+          <span>ALL RIGHTS RESERVED</span>
         </div>
       </div>
     </footer>

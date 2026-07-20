@@ -1,20 +1,50 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { HERO_TELEMETRY } from "@/data/telemetry";
 import { useSelection } from "@/context/SelectionContext";
 
 export function HeroSection() {
   const { openAccessModal } = useSelection();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const restartSeamless = () => {
+      // Restart just before natural end to avoid a hard freeze/flash.
+      if (!video.duration || Number.isNaN(video.duration)) return;
+      if (video.currentTime >= video.duration - 0.12) {
+        video.currentTime = 0.04;
+        void video.play().catch(() => undefined);
+      }
+    };
+
+    const onEnded = () => {
+      video.currentTime = 0.04;
+      void video.play().catch(() => undefined);
+    };
+
+    video.addEventListener("timeupdate", restartSeamless);
+    video.addEventListener("ended", onEnded);
+    void video.play().catch(() => undefined);
+
+    return () => {
+      video.removeEventListener("timeupdate", restartSeamless);
+      video.removeEventListener("ended", onEnded);
+    };
+  }, []);
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-black">
       <video
+        ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover object-[center_35%] sm:object-center"
         autoPlay
         muted
-        loop
         playsInline
-        preload="metadata"
+        preload="auto"
         poster="/brand/strafe-emblem.png"
         aria-label="STRAFE drone promotional orbit"
       >
@@ -74,7 +104,7 @@ export function HeroSection() {
           ))}
         </div>
         <p className="mt-4 font-mono text-[10px] tracking-[0.2em] text-[#83838A]">
-          SIMULATED PLATFORM ENVIRONMENT
+          CIVILIAN OPERATOR NETWORK
         </p>
       </div>
     </section>

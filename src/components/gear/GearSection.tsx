@@ -16,8 +16,8 @@ export function GearSection() {
           SUBSCRIPTION ACCESS
         </h2>
         <p className="mt-4 max-w-xl text-sm text-[#B5B5BB]">
-          Fictional plans for a fictional platform. No real payments are
-          processed.
+          Select the access tier that matches your operational tempo. Paid plans
+          unlock during private beta rollout.
         </p>
 
         <div className="mt-10 flex gap-4 overflow-x-auto pb-2 no-scrollbar md:grid md:grid-cols-2 md:overflow-visible xl:grid-cols-4">

@@ -5,8 +5,6 @@ import { HowItWorks } from "@/components/platform/HowItWorks";
 import { GearSection } from "@/components/gear/GearSection";
 import { BetaSection } from "@/components/waitlist/BetaSection";
 import { FounderPlaceholder } from "@/components/founder/FounderPlaceholder";
-import { AboutTeaser } from "@/components/platform/AboutTeaser";
-import { DisclosureBand } from "@/components/platform/DisclosureBand";
 
 export default function HomePage() {
   return (
@@ -18,8 +16,6 @@ export default function HomePage() {
       <GearSection />
       <BetaSection />
       <FounderPlaceholder />
-      <AboutTeaser />
-      <DisclosureBand />
     </>
   );
 }

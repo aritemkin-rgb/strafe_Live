@@ -127,7 +127,7 @@ export function WaitlistForm({
               {formatQueuePosition(queuePosition ?? 0)}
             </div>
             <div className="mt-2 text-[10px] text-[#83838A]">
-              Theatrical UI only
+              Estimated placement
             </div>
           </div>
           <div className="border border-white/10 p-3">
