@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# STRAFE.LIVE
 
-## Getting Started
+Fictional satirical platform artwork presenting remote warfare as a consumer livestream / subscription experience.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Production build:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Existing brand assets used
 
-To learn more about Next.js, take a look at the following resources:
+Preserved at project root and copied into `public/`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Original | Public path |
+| --- | --- |
+| `full logo.png` | `/brand/strafe-live-logo.png` |
+| `emblem.png` | `/brand/strafe-emblem.png` |
+| `Dronesample.mp4` | `/video/strafe-hero-loop.mp4` |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Do not regenerate or redraw these files.
 
-## Deploy on Vercel
+## Environment variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Copy `.env.example` to `.env.local`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL (optional locally) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-only Supabase key (never expose to client) |
+| `ADMIN_PASSWORD` | Password gate for `/admin` |
+
+Without Supabase configured, waitlist + selection analytics store in local `.data/` JSON files on the server.
+
+SQL schema: `supabase/schema.sql`
+
+## Admin
+
+Visit `/admin` (not linked in the public nav). Requires `ADMIN_PASSWORD`.
+
+## Hostinger
+
+See [HOSTINGER_DEPLOYMENT.md](./HOSTINGER_DEPLOYMENT.md).
