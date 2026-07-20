@@ -33,17 +33,27 @@ export async function GET() {
     russia: 0,
     israel: 0,
     palestine: 0,
+    saf: 0,
+    rsf: 0,
+    junta: 0,
+    resistance: 0,
     "no-preference": 0,
   };
   const theaterCounts: Record<string, number> = {
     "eastern-europe": 0,
     levant: 0,
+    sudan: 0,
+    myanmar: 0,
   };
   const signupBySide: Record<string, number> = {
     ukraine: 0,
     russia: 0,
     israel: 0,
     palestine: 0,
+    saf: 0,
+    rsf: 0,
+    junta: 0,
+    resistance: 0,
     "no-preference": 0,
   };
   const signupsByDay: Record<string, number> = {};

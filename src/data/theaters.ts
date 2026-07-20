@@ -1,9 +1,13 @@
-export type TheaterId = "eastern-europe" | "levant";
+export type TheaterId = "eastern-europe" | "levant" | "sudan" | "myanmar";
 export type SideId =
   | "ukraine"
   | "russia"
   | "israel"
   | "palestine"
+  | "saf"
+  | "rsf"
+  | "junta"
+  | "resistance"
   | "no-preference";
 
 export interface Faction {
@@ -74,6 +78,58 @@ export const THEATERS: Theater[] = [
         status: "ACCESS DEPLOYING",
         activity: "TRENDING",
         cta: "SELECT PALESTINE",
+      },
+    ],
+  },
+  {
+    id: "sudan",
+    name: "Sudan",
+    center: [30.2, 15.5],
+    zoom: 5.2,
+    factions: [
+      {
+        id: "saf",
+        name: "SAF",
+        flagSrc: "/flags/sd.svg",
+        countryIds: ["729"],
+        status: "HIGH DEMAND",
+        activity: "SUDANESE ARMED FORCES",
+        cta: "SELECT SAF",
+      },
+      {
+        id: "rsf",
+        name: "RSF",
+        flagSrc: "/flags/sd.svg",
+        countryIds: ["729"],
+        status: "TRENDING",
+        activity: "RAPID SUPPORT FORCES",
+        cta: "SELECT RSF",
+      },
+    ],
+  },
+  {
+    id: "myanmar",
+    name: "Myanmar",
+    center: [96.1, 21.9],
+    zoom: 5.4,
+    factions: [
+      {
+        id: "junta",
+        name: "Junta",
+        flagSrc: "/flags/mm.svg",
+        countryIds: ["104"],
+        status: "LIMITED BETA",
+        activity: "MILITARY JUNTA",
+        cta: "SELECT JUNTA",
+      },
+      {
+        id: "resistance",
+        name: "Resistance",
+        flagSrc: "/flags/mm.svg",
+        countryIds: ["104"],
+        status: "HIGH DEMAND",
+        activity: "PEOPLE'S DEFENSE FORCES",
+        cta: "SELECT RESISTANCE",
       },
     ],
   },

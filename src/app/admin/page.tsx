@@ -92,6 +92,10 @@ export default function AdminPage() {
     { label: "RUSSIA", value: stats.sideCounts.russia ?? 0 },
     { label: "ISRAEL", value: stats.sideCounts.israel ?? 0 },
     { label: "PALESTINE", value: stats.sideCounts.palestine ?? 0 },
+    { label: "SAF", value: stats.sideCounts.saf ?? 0 },
+    { label: "RSF", value: stats.sideCounts.rsf ?? 0 },
+    { label: "JUNTA", value: stats.sideCounts.junta ?? 0 },
+    { label: "RESISTANCE", value: stats.sideCounts.resistance ?? 0 },
     {
       label: "NO PREFERENCE",
       value: stats.sideCounts["no-preference"] ?? 0,
@@ -101,6 +105,8 @@ export default function AdminPage() {
       value: stats.theaterCounts["eastern-europe"] ?? 0,
     },
     { label: "LEVANT TOTAL", value: stats.theaterCounts.levant ?? 0 },
+    { label: "SUDAN TOTAL", value: stats.theaterCounts.sudan ?? 0 },
+    { label: "MYANMAR TOTAL", value: stats.theaterCounts.myanmar ?? 0 },
   ];
 
   return (

@@ -12,26 +12,27 @@ export function HeroSection() {
     const video = videoRef.current;
     if (!video) return;
 
-    const restartSeamless = () => {
-      // Restart just before natural end to avoid a hard freeze/flash.
+    const softLoop = () => {
       if (!video.duration || Number.isNaN(video.duration)) return;
-      if (video.currentTime >= video.duration - 0.12) {
-        video.currentTime = 0.04;
+      // Jump early so the browser never hits a frozen last frame.
+      if (video.duration - video.currentTime < 0.18) {
+        video.currentTime = 0.01;
         void video.play().catch(() => undefined);
       }
     };
 
     const onEnded = () => {
-      video.currentTime = 0.04;
+      video.currentTime = 0.01;
       void video.play().catch(() => undefined);
     };
 
-    video.addEventListener("timeupdate", restartSeamless);
+    video.loop = false;
+    video.addEventListener("timeupdate", softLoop);
     video.addEventListener("ended", onEnded);
     void video.play().catch(() => undefined);
 
     return () => {
-      video.removeEventListener("timeupdate", restartSeamless);
+      video.removeEventListener("timeupdate", softLoop);
       video.removeEventListener("ended", onEnded);
     };
   }, []);
