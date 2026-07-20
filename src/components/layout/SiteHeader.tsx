@@ -37,7 +37,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="relative h-12 w-[200px] shrink-0 sm:h-14 sm:w-[260px]"
+          className="relative h-14 w-[210px] shrink-0 sm:h-14 sm:w-[260px]"
         >
           <Image
             src="/brand/strafe-live-logo.png"

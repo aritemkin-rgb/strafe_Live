@@ -29,6 +29,8 @@ export function WorldMap({
   const [countries, setCountries] = useState<
     FeatureCollection<Geometry, CountryProps> | null
   >(null);
+  // md+ keeps side pickers overlaid on the map; phones put them below.
+  const [desktopOverlay, setDesktopOverlay] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -48,6 +50,14 @@ export function WorldMap({
     };
   }, []);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const sync = () => setDesktopOverlay(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
   const theater = THEATERS.find((t) => t.id === activeTheater) ?? null;
   const width = 960;
   const height = 520;
@@ -55,17 +65,19 @@ export function WorldMap({
   const projection = useMemo(() => {
     const p = geoMercator().precision(0.1);
     if (theater) {
-      // Leave room on the right when signup panel is open; leave bottom for faction overlay.
-      const tx = focusMode ? width * 0.42 : width * 0.5;
-      const ty = height * 0.42;
+      // Desktop: leave room for signup panel + bottom faction overlay.
+      // Mobile: center the theater so geography fills the frame.
+      const tx =
+        desktopOverlay && focusMode ? width * 0.42 : width * 0.5;
+      const ty = desktopOverlay ? height * 0.42 : height * 0.5;
+      const scaleBoost = desktopOverlay ? 1 : 0.92;
       return p
         .center(theater.center)
-        .scale(120 * theater.zoom)
+        .scale(120 * theater.zoom * scaleBoost)
         .translate([tx, ty]);
     }
     return p.scale(140).translate([width / 2, height / 1.55]);
-  }, [theater, focusMode]);
-
+  }, [theater, focusMode, desktopOverlay]);
   const path = useMemo(() => geoPath(projection), [projection]);
 
   const highlightedIds = useMemo(() => {
