@@ -7,7 +7,6 @@ import { Menu, X } from "lucide-react";
 import { useSelection } from "@/context/SelectionContext";
 
 const LINKS = [
-  { href: "#platform", label: "PLATFORM" },
   { href: "#theaters", label: "THEATERS" },
   { href: "#gear", label: "GEAR" },
   { href: "/about", label: "ABOUT" },
