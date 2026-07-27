@@ -8,7 +8,7 @@ import { useSelection } from "@/context/SelectionContext";
 
 const LINKS = [
   { href: "#theaters", label: "THEATERS" },
-  { href: "#gear", label: "GEAR" },
+  { href: "/gear", label: "GEAR" },
   { href: "/about", label: "ABOUT" },
 ];
 
