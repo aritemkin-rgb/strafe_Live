@@ -63,13 +63,13 @@ export function HeroSection() {
             JOIN THE FIGHT
           </h1>
           <p className="max-w-xl text-base leading-relaxed text-[#F7F7F7] sm:text-xl">
-            STRAFE.LIVE is the platform that lets civilians operate combat drones
-            in active war theaters — from anywhere.
+            Civilians. Combat drones. Active war theaters.
           </p>
-          <p className="max-w-md text-sm leading-relaxed text-[#B5B5BB]">
-            Pick a theater. Choose a side. Get an airframe shipped to the
-            battlefield. Fly the mission. Keep the clip.
-          </p>
+          <div className="space-y-2 text-lg text-[#F7F7F7] sm:text-xl">
+            <p>Choose your side.</p>
+            <p>Select your gear.</p>
+            <p>Get your viral clip.</p>
+          </div>
           <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <a
               href="/#theaters"
