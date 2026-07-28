@@ -151,7 +151,3 @@ export function getFaction(sideId: SideId | null) {
   }
   return null;
 }
-
-export function getTheater(theaterId: TheaterId | null) {
-  return THEATERS.find((t) => t.id === theaterId) ?? null;
-}

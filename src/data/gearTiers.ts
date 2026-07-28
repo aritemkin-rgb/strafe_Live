@@ -21,7 +21,7 @@ export const GEAR_TIERS: GearTier[] = [
       "Public chat viewing",
       "No remote control access",
     ],
-    cta: "WATCH FEEDS",
+    cta: "REQUEST ACCESS",
   },
   {
     id: "operator",
@@ -36,16 +36,17 @@ export const GEAR_TIERS: GearTier[] = [
       "Low-latency viewing",
       "Shared network airframes",
     ],
-    cta: "JOIN WAITLIST",
-    featured: true,
+    cta: "REQUEST ACCESS",
   },
   {
     id: "commander",
     name: "Commander",
     price: "$149.99 / MONTH",
-    blurb: "Includes a free S-1 Scout airframe shipped to you.",
+    blurb:
+      "Includes a free S-1 Scout shipped to your chosen battlefield theater.",
     features: [
       "Free S-1 Scout drone included",
+      "Shipped to your selected theater",
       "Multi-theater access",
       "Multi-angle replay",
       "Priority deployment queue",
@@ -68,6 +69,6 @@ export const GEAR_TIERS: GearTier[] = [
       "Sponsored-content tools",
       "Engagement forecasting",
     ],
-    cta: "APPLY FOR ACCESS",
+    cta: "REQUEST ACCESS",
   },
 ];

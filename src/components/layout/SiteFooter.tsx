@@ -2,9 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 const LINKS = [
-  { href: "#theaters", label: "THEATERS" },
+  { href: "/#theaters", label: "THEATERS" },
   { href: "/gear", label: "GEAR" },
   { href: "/about", label: "ABOUT" },
+  { href: "/disclosure", label: "DISCLOSURE" },
   { href: "/privacy", label: "PRIVACY" },
   { href: "/terms", label: "TERMS" },
 ];
@@ -25,6 +26,10 @@ export function SiteFooter() {
             </div>
             <p className="text-sm tracking-wide text-[#B5B5BB]">
               THE BATTLEFIELD IS NO LONGER SOMEWHERE ELSE.
+            </p>
+            <p className="text-xs leading-relaxed text-[#83838A]">
+              Airframes ship to your selected theater. Choose your side, then
+              request allocation.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3">

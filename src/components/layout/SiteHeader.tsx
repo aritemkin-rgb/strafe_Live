@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 import { useSelection } from "@/context/SelectionContext";
 
 const LINKS = [
-  { href: "#theaters", label: "THEATERS" },
+  { href: "/#theaters", label: "THEATERS" },
   { href: "/gear", label: "GEAR" },
   { href: "/about", label: "ABOUT" },
 ];
@@ -48,13 +48,13 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-6 lg:flex">
           {LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-[11px] tracking-[0.18em] text-[#B5B5BB] transition hover:text-white"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -98,14 +98,14 @@ export function SiteHeader() {
           </div>
           <div className="flex flex-col gap-3">
             {LINKS.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className="text-sm tracking-[0.16em] text-white"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <button
               type="button"

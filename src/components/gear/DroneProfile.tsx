@@ -81,6 +81,16 @@ export function DroneProfile({ drone }: { drone: Drone }) {
 
             <p className="mt-6 text-sm text-[#B5B5BB]">{drone.payloadBay}</p>
 
+            <div className="mt-4 rounded-sm border border-[#EF4444]/30 bg-[#EF4444]/5 px-4 py-3">
+              <p className="font-mono text-[10px] tracking-[0.18em] text-[#EF4444]">
+                THEATER DELIVERY
+              </p>
+              <p className="mt-1 text-sm text-[#B5B5BB]">
+                We ship this airframe to your desired battlefield after you
+                choose a theater and side.
+              </p>
+            </div>
+
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"
@@ -90,16 +100,16 @@ export function DroneProfile({ drone }: { drone: Drone }) {
                 REQUEST ALLOCATION
               </button>
               <Link
-                href="/#waitlist"
+                href="/#theaters"
                 className="rounded-sm border border-white/15 px-5 py-3 text-center text-[11px] tracking-[0.18em] text-white transition hover:border-white/40"
               >
-                JOIN WAITLIST
+                CHOOSE THEATER
               </Link>
             </div>
 
             {drone.id === "s1-scout" ? (
               <p className="mt-4 font-mono text-[10px] tracking-[0.14em] text-[#EF4444]">
-                INCLUDED FREE WITH COMMANDER SUBSCRIPTION
+                INCLUDED FREE WITH COMMANDER · SHIPPED TO YOUR THEATER
               </p>
             ) : null}
           </div>

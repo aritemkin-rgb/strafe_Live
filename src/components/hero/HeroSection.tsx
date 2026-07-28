@@ -74,7 +74,7 @@ export function HeroSection() {
           </p>
           <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <a
-              href="#theaters"
+              href="/#theaters"
               className="inline-flex items-center justify-center rounded-sm bg-[#EF4444] px-6 py-3 text-xs tracking-[0.18em] text-white transition hover:bg-red-500"
             >
               CHOOSE YOUR SIDE

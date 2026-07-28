@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  IBM_Plex_Mono,
-  Space_Grotesk,
-} from "next/font/google";
+import { Geist, IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import { SelectionProvider } from "@/context/SelectionContext";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { HashScroll } from "@/components/layout/HashScroll";
 import { BootSequence } from "@/components/hero/BootSequence";
 import { AccessModal } from "@/components/waitlist/AccessModal";
 import "./globals.css";
@@ -19,11 +15,6 @@ const spaceGrotesk = Space_Grotesk({
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -56,9 +47,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable} ${ibmPlexMono.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${geistSans.variable} ${ibmPlexMono.variable} antialiased`}
       >
         <SelectionProvider>
+          <HashScroll />
           <BootSequence />
           <SiteHeader />
           <main>{children}</main>

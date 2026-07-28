@@ -5,13 +5,6 @@ export const HERO_TELEMETRY = [
   { label: "NETWORK", value: "LIVE" },
 ];
 
-export const STREAM_TELEMETRY = {
-  viewers: "14,882",
-  latency: "42MS",
-  signal: "98%",
-  session: "SL-8471",
-};
-
 export const ROLLOUT_STATUS = [
   { region: "North America", status: "LIMITED BETA" },
   { region: "Western Europe", status: "WAITLIST OPEN" },
