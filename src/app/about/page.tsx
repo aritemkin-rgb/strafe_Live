@@ -12,20 +12,22 @@ export default function AboutPage() {
         MISSION
       </p>
       <h1 className="mt-3 font-display text-4xl text-white sm:text-5xl">
-        PRIVATE ACCESS FOR CIVILIANS
+        COMBAT DRONES FOR CIVILIANS
       </h1>
       <div className="mt-8 space-y-4 text-[#B5B5BB]">
         <p>
-          STRAFE.LIVE gives civilians private access to remote drone operations
-          so they can support the side they believe in — in real time.
+          STRAFE.LIVE is a civilian operator platform. It gives private citizens
+          remote access to combat drones in active war theaters so they can
+          support the side they believe in — in real time.
         </p>
         <p>
-          Choose your theater. Choose your allegiance. Deploy through a secure
-          operator account and stay connected to the feed from anywhere.
+          Choose your theater. Choose your allegiance. Request an airframe
+          shipped to the battlefield. Deploy through a secure operator account
+          and fly from anywhere.
         </p>
         <p>
-          The platform is built for remote access, live engagement, and mission
-          clarity. Your side. Your gear. Your clip.
+          The platform is built for remote combat access, live engagement, and
+          mission clarity. Your side. Your drone. Your clip.
         </p>
         <p>
           Founded by Gen. Norman Mann, STRAFE is opening private beta to the

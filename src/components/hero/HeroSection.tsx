@@ -47,7 +47,7 @@ export function HeroSection() {
         playsInline
         preload="auto"
         poster="/brand/strafe-emblem.png"
-        aria-label="STRAFE drone promotional orbit"
+        aria-label="STRAFE combat drone promotional orbit"
       >
         <source src="/video/strafe-hero-loop.mp4?v=3" type="video/mp4" />
       </video>
@@ -57,27 +57,25 @@ export function HeroSection() {
       <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20 lg:justify-center lg:px-8 lg:pb-24">
         <div className="max-w-2xl space-y-6">
           <p className="font-mono text-[11px] tracking-[0.28em] text-[#EF4444]">
-            PRIVATE BETA // CIVILIAN ACCESS
+            CIVILIAN COMBAT DRONE ACCESS
           </p>
           <h1 className="font-display text-5xl leading-[0.95] text-white sm:text-7xl lg:text-8xl">
             JOIN THE FIGHT
           </h1>
-          <div className="space-y-2 text-lg text-[#F7F7F7] sm:text-xl">
-            <p>Choose your side.</p>
-            <p>Choose your gear.</p>
-            <p>Get the clip.</p>
-          </div>
-          <p className="max-w-md text-sm leading-relaxed text-[#B5B5BB] sm:text-base">
-            Remote access. Real-time engagement.
-            <br />
-            The battlefield is no longer somewhere else.
+          <p className="max-w-xl text-base leading-relaxed text-[#F7F7F7] sm:text-xl">
+            STRAFE.LIVE is the platform that lets civilians operate combat drones
+            in active war theaters — from anywhere.
+          </p>
+          <p className="max-w-md text-sm leading-relaxed text-[#B5B5BB]">
+            Pick a theater. Choose a side. Get an airframe shipped to the
+            battlefield. Fly the mission. Keep the clip.
           </p>
           <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <a
               href="/#theaters"
               className="inline-flex items-center justify-center rounded-sm bg-[#EF4444] px-6 py-3 text-xs tracking-[0.18em] text-white transition hover:bg-red-500"
             >
-              CHOOSE YOUR SIDE
+              ENTER A WAR THEATER
             </a>
             <button
               type="button"
@@ -105,7 +103,7 @@ export function HeroSection() {
           ))}
         </div>
         <p className="mt-4 font-mono text-[10px] tracking-[0.2em] text-[#83838A]">
-          CIVILIAN OPERATOR NETWORK
+          FOR CIVILIANS · ACTIVE THEATERS · COMBAT AIRFRAMES
         </p>
       </div>
     </section>

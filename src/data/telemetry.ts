@@ -1,8 +1,8 @@
 export const HERO_TELEMETRY = [
-  { label: "UNIT", value: "STRAFE // 01" },
-  { label: "STATUS", value: "ONLINE" },
-  { label: "ACCESS", value: "PRIVATE BETA" },
-  { label: "NETWORK", value: "LIVE" },
+  { label: "ACCESS", value: "CIVILIANS" },
+  { label: "ASSET", value: "COMBAT UAV" },
+  { label: "ZONE", value: "WAR THEATER" },
+  { label: "STATUS", value: "LIVE" },
 ];
 
 export const ROLLOUT_STATUS = [

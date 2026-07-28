@@ -93,7 +93,7 @@ export function SiteHeader() {
               />
             </div>
             <span className="text-xs tracking-[0.2em] text-[#B5B5BB]">
-              CIVILIAN NETWORK
+              CIVILIAN COMBAT ACCESS
             </span>
           </div>
           <div className="flex flex-col gap-3">

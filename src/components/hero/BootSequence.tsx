@@ -49,9 +49,9 @@ export function BootSequence() {
               />
             </div>
             <div className="space-y-2 font-mono text-[11px] tracking-[0.28em] text-[#B5B5BB]">
-              <p>STRAFE CIVILIAN NETWORK</p>
+              <p>CIVILIAN COMBAT ACCESS</p>
               <p className={phase >= 1 ? "text-white" : "text-[#83838A]"}>
-                {phase < 2 ? "INITIALIZING PLATFORM" : "SYSTEM ONLINE"}
+                {phase < 2 ? "LINKING WAR THEATERS" : "OPERATOR NETWORK ONLINE"}
               </p>
             </div>
           </div>
