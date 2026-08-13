@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { getSupabaseAdmin, isSupabaseConfigured } from "@/lib/supabaseAdmin";
-import { getLocalStats } from "@/lib/selectionStorage";
+import {
+  getLocalCareerApplications,
+  getLocalStats,
+} from "@/lib/selectionStorage";
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -30,6 +33,10 @@ export async function GET() {
   const { data: selections } = await supabase
     .from("side_selection_events")
     .select("selected_theater, selected_side, event_type, created_at");
+  const { data: careerRows } = await supabase
+    .from("career_applications")
+    .select("id, email, name, role, note, linkedin_url, created_at")
+    .order("created_at", { ascending: false });
 
   const sideCounts: Record<string, number> = {
     ukraine: 0,
@@ -81,10 +88,22 @@ export async function GET() {
     signupsByDay[day] = (signupsByDay[day] ?? 0) + 1;
   }
 
+  const applications =
+    careerRows?.map((row) => ({
+      id: row.id,
+      email: row.email,
+      name: row.name,
+      role: row.role,
+      note: row.note || "",
+      linkedin: row.linkedin_url || "",
+      createdAt: row.created_at,
+    })) ?? (await getLocalCareerApplications());
+
   return NextResponse.json({
     totalWaitlist: waitlist?.length ?? 0,
     totalSelections: (selections ?? []).filter((s) => s.event_type === "select")
       .length,
+    totalApplications: applications.length,
     sideCounts,
     theaterCounts,
     signupBySide,
@@ -99,6 +118,7 @@ export async function GET() {
       source: row.source ?? "homepage",
       createdAt: row.created_at,
     })),
+    applications,
     storage: "supabase",
   });
 }

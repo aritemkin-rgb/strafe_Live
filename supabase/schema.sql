@@ -36,7 +36,22 @@ create index if not exists side_selection_events_side_idx
 create index if not exists side_selection_events_theater_idx
   on public.side_selection_events (selected_theater);
 
+create table if not exists public.career_applications (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  name text not null,
+  role text not null,
+  note text,
+  linkedin_url text,
+  created_at timestamptz not null default now()
+);
+
+alter table public.career_applications add column if not exists linkedin_url text;
+
+create index if not exists career_applications_role_idx
+  on public.career_applications (role);
+
 -- Keep service role on the server only. Do not expose service role to the browser.
--- Recommended: disable public insert policies and write only via service role from API routes.
 alter table public.waitlist_signups enable row level security;
 alter table public.side_selection_events enable row level security;
+alter table public.career_applications enable row level security;

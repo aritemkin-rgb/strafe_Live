@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useSelection } from "@/context/SelectionContext";
+import { useState } from "react";
+import { CareerApplicationForm } from "@/components/careers/CareerApplicationForm";
 
 const ROLES = [
   {
@@ -35,7 +36,7 @@ const ROLES = [
 ];
 
 export function CareersContent() {
-  const { openAccessModal } = useSelection();
+  const [activeRole, setActiveRole] = useState<string | null>(null);
 
   return (
     <div className="mx-auto max-w-4xl px-4 pb-24 pt-28 sm:px-6">
@@ -65,13 +66,23 @@ export function CareersContent() {
               </div>
               <button
                 type="button"
-                onClick={() => openAccessModal(`careers-${role.title}`)}
+                onClick={() =>
+                  setActiveRole((current) =>
+                    current === role.title ? null : role.title,
+                  )
+                }
                 className="rounded-sm border border-white/15 px-4 py-2 text-[11px] tracking-[0.16em] text-white transition hover:border-white/40"
               >
-                APPLY
+                {activeRole === role.title ? "CLOSE" : "APPLY"}
               </button>
             </div>
             <p className="mt-4 text-sm text-[#B5B5BB]">{role.summary}</p>
+            {activeRole === role.title ? (
+              <CareerApplicationForm
+                role={role.title}
+                onClose={() => setActiveRole(null)}
+              />
+            ) : null}
           </div>
         ))}
       </div>

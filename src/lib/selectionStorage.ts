@@ -1,10 +1,15 @@
 import { promises as fs } from "fs";
 import path from "path";
-import type { SelectionInput, WaitlistInput } from "./validation";
+import type {
+  CareerApplicationInput,
+  SelectionInput,
+  WaitlistInput,
+} from "./validation";
 
 const DATA_DIR = path.join(process.cwd(), ".data");
 const WAITLIST_FILE = path.join(DATA_DIR, "waitlist.json");
 const SELECTIONS_FILE = path.join(DATA_DIR, "selections.json");
+const APPLICATIONS_FILE = path.join(DATA_DIR, "career-applications.json");
 
 async function ensureDataDir() {
   await fs.mkdir(DATA_DIR, { recursive: true });
@@ -34,6 +39,11 @@ export interface LocalSelectionRow extends SelectionInput {
   created_at: string;
 }
 
+export interface LocalCareerApplicationRow extends CareerApplicationInput {
+  id: string;
+  created_at: string;
+}
+
 export async function appendLocalWaitlist(row: WaitlistInput) {
   const rows = await readJson<LocalWaitlistRow[]>(WAITLIST_FILE, []);
   const entry: LocalWaitlistRow = {
@@ -58,9 +68,47 @@ export async function appendLocalSelection(row: SelectionInput) {
   return entry;
 }
 
+export async function appendLocalCareerApplication(
+  row: CareerApplicationInput,
+  id = crypto.randomUUID(),
+) {
+  const rows = await readJson<LocalCareerApplicationRow[]>(
+    APPLICATIONS_FILE,
+    [],
+  );
+  const entry: LocalCareerApplicationRow = {
+    ...row,
+    id,
+    created_at: new Date().toISOString(),
+  };
+  rows.push(entry);
+  await writeJson(APPLICATIONS_FILE, rows);
+  return entry;
+}
+
+export async function getLocalCareerApplications() {
+  const rows = await readJson<LocalCareerApplicationRow[]>(
+    APPLICATIONS_FILE,
+    [],
+  );
+  return rows
+    .slice()
+    .sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
+    .map((row) => ({
+      id: row.id,
+      email: row.email,
+      name: row.name,
+      role: row.role,
+      note: row.note || "",
+      linkedin: row.linkedin || "",
+      createdAt: row.created_at,
+    }));
+}
+
 export async function getLocalStats() {
   const waitlist = await readJson<LocalWaitlistRow[]>(WAITLIST_FILE, []);
   const selections = await readJson<LocalSelectionRow[]>(SELECTIONS_FILE, []);
+  const applications = await getLocalCareerApplications();
 
   const sideCounts: Record<string, number> = {
     ukraine: 0,
@@ -118,6 +166,7 @@ export async function getLocalStats() {
   return {
     totalWaitlist: waitlist.length,
     totalSelections: selections.filter((s) => s.eventType === "select").length,
+    totalApplications: applications.length,
     sideCounts,
     theaterCounts,
     signupBySide,
@@ -135,6 +184,7 @@ export async function getLocalStats() {
         source: row.source ?? "homepage",
         createdAt: row.created_at,
       })),
+    applications,
     storage: "local" as const,
   };
 }

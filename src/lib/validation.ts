@@ -23,6 +23,32 @@ export const waitlistSchema = z.object({
   source: z.string().max(80).optional().default("homepage"),
 });
 
+export const careerApplicationSchema = z.object({
+  email: z.string().email("Enter a valid email address"),
+  name: z.string().min(1, "Enter your name").max(80),
+  role: z.string().min(1).max(80),
+  note: z.string().max(500).optional().or(z.literal("")),
+  linkedin: z
+    .string()
+    .optional()
+    .or(z.literal(""))
+    .refine(
+      (value) => {
+        if (!value) return true;
+        try {
+          const url = new URL(value);
+          return (
+            (url.protocol === "http:" || url.protocol === "https:") &&
+            url.hostname.replace(/^www\./, "").endsWith("linkedin.com")
+          );
+        } catch {
+          return false;
+        }
+      },
+      { message: "Enter a valid LinkedIn URL" },
+    ),
+});
+
 export const selectionSchema = z.object({
   anonymousSessionId: z.string().min(8).max(80),
   selectedTheater: theaterEnum.nullable(),
@@ -31,4 +57,5 @@ export const selectionSchema = z.object({
 });
 
 export type WaitlistInput = z.infer<typeof waitlistSchema>;
+export type CareerApplicationInput = z.infer<typeof careerApplicationSchema>;
 export type SelectionInput = z.infer<typeof selectionSchema>;

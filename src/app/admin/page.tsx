@@ -13,14 +13,26 @@ interface SignupRow {
   createdAt: string;
 }
 
+interface ApplicationRow {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  note: string;
+  linkedin: string;
+  createdAt: string;
+}
+
 interface Stats {
   totalWaitlist: number;
   totalSelections: number;
+  totalApplications?: number;
   sideCounts: Record<string, number>;
   theaterCounts: Record<string, number>;
   signupBySide: Record<string, number>;
   signupsByDay: Record<string, number>;
   signups?: SignupRow[];
+  applications?: ApplicationRow[];
   storage: string;
 }
 
@@ -140,6 +152,10 @@ export default function AdminPage() {
   const cards = [
     { label: "TOTAL WAITLIST SIGNUPS", value: stats.totalWaitlist },
     { label: "TOTAL SIDE SELECTIONS", value: stats.totalSelections },
+    {
+      label: "CAREER APPLICATIONS",
+      value: stats.totalApplications ?? stats.applications?.length ?? 0,
+    },
     { label: "UKRAINE", value: stats.sideCounts.ukraine ?? 0 },
     { label: "RUSSIA", value: stats.sideCounts.russia ?? 0 },
     { label: "ISRAEL", value: stats.sideCounts.israel ?? 0 },
@@ -231,6 +247,62 @@ export default function AdminPage() {
                       {row.selectedSide ?? "—"}
                     </td>
                     <td className="px-5 py-3">{row.source}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-10 overflow-hidden rounded-sm border border-white/10 bg-[#0C0C0D]">
+        <div className="border-b border-white/10 px-5 py-4">
+          <h2 className="font-mono text-[11px] tracking-[0.18em] text-[#B5B5BB]">
+            CAREER APPLICATIONS
+          </h2>
+        </div>
+        {!stats.applications?.length ? (
+          <p className="px-5 py-6 text-sm text-[#83838A]">
+            No applications yet.
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-sm">
+              <thead className="font-mono text-[10px] tracking-[0.14em] text-[#83838A]">
+                <tr className="border-b border-white/10">
+                  <th className="px-5 py-3 font-normal">WHEN</th>
+                  <th className="px-5 py-3 font-normal">EMAIL</th>
+                  <th className="px-5 py-3 font-normal">NAME</th>
+                  <th className="px-5 py-3 font-normal">ROLE</th>
+                  <th className="px-5 py-3 font-normal">LINKEDIN</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.applications.map((row) => (
+                  <tr
+                    key={row.id}
+                    className="border-b border-white/5 text-[#B5B5BB]"
+                  >
+                    <td className="whitespace-nowrap px-5 py-3 text-xs">
+                      {new Date(row.createdAt).toLocaleString()}
+                    </td>
+                    <td className="px-5 py-3 text-white">{row.email}</td>
+                    <td className="px-5 py-3">{row.name || "—"}</td>
+                    <td className="px-5 py-3">{row.role}</td>
+                    <td className="px-5 py-3">
+                      {row.linkedin ? (
+                        <a
+                          href={row.linkedin}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-white underline-offset-4 hover:underline"
+                        >
+                          Profile
+                        </a>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
