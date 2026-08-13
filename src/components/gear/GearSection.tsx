@@ -7,7 +7,7 @@ import { SubscriptionTiers } from "@/components/gear/SubscriptionTiers";
 
 export function GearSection() {
   return (
-    <section id="gear" className="scroll-mt-20 bg-black py-20 sm:py-28">
+    <section id="gear" className="scroll-mt-36 bg-black py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>

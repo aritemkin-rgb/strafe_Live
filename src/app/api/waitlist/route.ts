@@ -21,23 +21,44 @@ export async function POST(request: Request) {
 
     if (isSupabaseConfigured()) {
       const supabase = getSupabaseAdmin();
-      if (supabase) {
-        const { error } = await supabase.from("waitlist_signups").insert({
-          email: data.email.toLowerCase(),
-          name: data.name || data.callsign || null,
-          callsign: data.callsign || data.name || null,
-          marketing_consent: data.marketingConsent ?? false,
-          source: data.source ?? "homepage",
-          selected_theater: data.selectedTheater ?? null,
-          selected_side: data.selectedSide ?? null,
-        });
+      if (!supabase) {
+        return NextResponse.json(
+          { error: "Database unavailable" },
+          { status: 503 },
+        );
+      }
 
-        if (error) {
-          // fall through to local storage for resilience
-          await appendLocalWaitlist(data);
+      const { error } = await supabase.from("waitlist_signups").insert({
+        email: data.email.toLowerCase(),
+        name: data.name || data.callsign || null,
+        callsign: data.callsign || data.name || null,
+        marketing_consent: data.marketingConsent ?? false,
+        source: data.source ?? "homepage",
+        selected_theater: data.selectedTheater ?? null,
+        selected_side: data.selectedSide ?? null,
+      });
+
+      if (error) {
+        const duplicate =
+          error.code === "23505" ||
+          /duplicate|unique/i.test(error.message ?? "");
+        if (duplicate) {
+          return NextResponse.json({
+            ok: true,
+            queuePosition,
+            queueLabel: formatQueuePosition(queuePosition),
+            message: "You're already on the list",
+            alreadyRegistered: true,
+          });
         }
+        console.error("[waitlist] supabase insert failed", error.message);
+        return NextResponse.json(
+          { error: "Could not save signup. Try again." },
+          { status: 502 },
+        );
       }
     } else {
+      // Local JSON fallback — fine for development; Hostinger redeploys wipe .data/
       await appendLocalWaitlist(data);
     }
 

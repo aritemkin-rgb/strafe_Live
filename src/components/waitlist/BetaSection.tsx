@@ -5,7 +5,7 @@ import { WaitlistForm } from "@/components/waitlist/WaitlistForm";
 
 export function BetaSection() {
   return (
-    <section id="waitlist" className="scroll-mt-20 bg-[#070707] py-20 sm:py-28">
+    <section id="waitlist" className="scroll-mt-36 bg-[#070707] py-20 sm:py-28">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
         <div>
           <p className="font-mono text-[11px] tracking-[0.28em] text-[#EF4444]">

@@ -13,7 +13,7 @@ export function DroneProfile({ drone }: { drone: Drone }) {
   const others = DRONES.filter((d) => d.id !== drone.id);
 
   return (
-    <div className="bg-black pb-24 pt-28">
+    <div className="bg-black pb-24 pt-36">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/gear"

@@ -142,7 +142,7 @@ export function ChooseYourSide() {
   };
 
   return (
-    <section id="theaters" className="scroll-mt-24 bg-[#070707] py-16 sm:py-28">
+    <section id="theaters" className="scroll-mt-36 bg-[#070707] py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-2xl sm:mb-10">
           <p className="font-mono text-[11px] tracking-[0.28em] text-[#EF4444]">

@@ -37,7 +37,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-black">
+    <section className="relative flex min-h-[100svh] flex-col overflow-hidden bg-black">
       <video
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover object-[center_35%] sm:object-center"
@@ -51,10 +51,11 @@ export function HeroSection() {
         <source src="/video/strafe-hero-loop.mp4?v=3" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50" />
 
-      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20 lg:justify-center lg:px-8 lg:pb-24">
-        <div className="max-w-2xl space-y-6">
+      {/* Content pinned to bottom so the hero doesn't leave a dead black band before the next section */}
+      <div className="relative mx-auto mt-auto flex w-full max-w-7xl flex-col px-4 pb-10 pt-32 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
+        <div className="max-w-2xl space-y-5">
           <p className="font-mono text-[11px] tracking-[0.28em] text-[#EF4444]">
             PRIVATE BETA
           </p>
@@ -69,7 +70,7 @@ export function HeroSection() {
           <p className="max-w-md text-sm leading-relaxed text-[#B5B5BB] sm:text-base">
             Civilian access to combat drones in active war theaters.
           </p>
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+          <div className="flex flex-col gap-3 pt-1 sm:flex-row">
             <a
               href="/#theaters"
               className="inline-flex items-center justify-center rounded-sm bg-[#EF4444] px-6 py-3 text-xs tracking-[0.18em] text-white transition hover:bg-red-500"
@@ -86,7 +87,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="mt-12 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-8 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
           {HERO_TELEMETRY.map((item) => (
             <div
               key={item.label}

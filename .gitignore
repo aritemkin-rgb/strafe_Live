@@ -36,8 +36,13 @@ yarn-error.log*
 .env.*.local
 !.env.example
 
-# local analytics fallback store
-.data/
+# Source media archives (app serves copies from public/)
+/drones/
+/Dronesample.mp4
+/Dronesample2.mp4
+/Dronesample_3.mp4
+/full logo.png
+/emblem.png
 
 # vercel
 .vercel

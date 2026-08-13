@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function DisclosurePage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-24 pt-28 sm:px-6">
+    <div className="mx-auto max-w-3xl px-4 pb-24 pt-36 sm:px-6">
       <p className="font-mono text-[11px] tracking-[0.28em] text-[#EF4444]">
         ALL SYSTEMS FICTIONAL
       </p>

@@ -113,7 +113,7 @@ export default function AdminPage() {
 
   if (!authed) {
     return (
-      <div className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 pt-24">
+      <div className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-4 pt-36">
         <h1 className="font-display text-3xl text-white">Admin</h1>
         <p className="mt-2 text-sm text-[#83838A]">
           Protected analytics. Not linked publicly.
@@ -145,7 +145,7 @@ export default function AdminPage() {
 
   if (!stats) {
     return (
-      <div className="px-4 pt-28 text-center text-[#83838A]">Loading…</div>
+      <div className="px-4 pt-36 text-center text-[#83838A]">Loading…</div>
     );
   }
 
@@ -178,7 +178,7 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-24 pt-28 sm:px-6">
+    <div className="mx-auto max-w-6xl px-4 pb-24 pt-36 sm:px-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-display text-4xl text-white">Analytics</h1>

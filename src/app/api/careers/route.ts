@@ -20,21 +20,28 @@ export async function POST(request: Request) {
 
     if (isSupabaseConfigured()) {
       const supabase = getSupabaseAdmin();
-      if (supabase) {
-        const { error } = await supabase.from("career_applications").insert({
-          id: applicationId,
-          email: data.email.toLowerCase(),
-          name: data.name,
-          role: data.role,
-          note: data.note || null,
-          linkedin_url: data.linkedin || null,
-        });
+      if (!supabase) {
+        return NextResponse.json(
+          { error: "Database unavailable" },
+          { status: 503 },
+        );
+      }
 
-        if (error) {
-          await appendLocalCareerApplication(data, applicationId);
-        }
-      } else {
-        await appendLocalCareerApplication(data, applicationId);
+      const { error } = await supabase.from("career_applications").insert({
+        id: applicationId,
+        email: data.email.toLowerCase(),
+        name: data.name,
+        role: data.role,
+        note: data.note || null,
+        linkedin_url: data.linkedin || null,
+      });
+
+      if (error) {
+        console.error("[careers] supabase insert failed", error.message);
+        return NextResponse.json(
+          { error: "Could not save application. Try again." },
+          { status: 502 },
+        );
       }
     } else {
       await appendLocalCareerApplication(data, applicationId);

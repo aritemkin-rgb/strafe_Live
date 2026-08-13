@@ -7,7 +7,7 @@ import { SubscriptionTiers } from "@/components/gear/SubscriptionTiers";
 
 export function GearCatalogPage() {
   return (
-    <div className="bg-black pb-24 pt-28">
+    <div className="bg-black pb-24 pt-36">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="overflow-hidden rounded-sm border border-white/10 bg-[#0C0C0D]">
           <div className="relative aspect-[21/9] min-h-[200px] sm:min-h-[280px]">
@@ -53,7 +53,7 @@ export function GearCatalogPage() {
           ))}
         </div>
 
-        <div id="access" className="mt-20 scroll-mt-28">
+        <div id="access" className="mt-20 scroll-mt-36">
           <SubscriptionTiers
             intro="Spectator watches other people fly. Operator uses shared network drones. Commander ships with a free S-1 Scout to your chosen theater."
           />
