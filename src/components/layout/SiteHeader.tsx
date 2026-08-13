@@ -10,6 +10,7 @@ const LINKS = [
   { href: "/#theaters", label: "THEATERS" },
   { href: "/gear", label: "GEAR" },
   { href: "/about", label: "ABOUT" },
+  { href: "/careers", label: "CAREERS" },
 ];
 
 export function SiteHeader() {

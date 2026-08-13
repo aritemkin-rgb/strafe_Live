@@ -5,6 +5,7 @@ const LINKS = [
   { href: "/#theaters", label: "THEATERS" },
   { href: "/gear", label: "GEAR" },
   { href: "/about", label: "ABOUT" },
+  { href: "/careers", label: "CAREERS" },
   { href: "/disclosure", label: "DISCLOSURE" },
   { href: "/privacy", label: "PRIVACY" },
   { href: "/terms", label: "TERMS" },
@@ -27,10 +28,14 @@ export function SiteFooter() {
             <p className="text-sm tracking-wide text-[#B5B5BB]">
               THE BATTLEFIELD IS NO LONGER SOMEWHERE ELSE.
             </p>
-            <p className="text-xs leading-relaxed text-[#83838A]">
-              Airframes ship to your selected theater. Choose your side, then
-              request allocation.
-            </p>
+            <div className="space-y-1 text-xs leading-relaxed text-[#83838A]">
+              <p className="font-mono tracking-[0.14em] text-[#B5B5BB]">
+                STRAFE SYSTEMS LLC
+              </p>
+              <p>A GENERAL.MANN COMPANY</p>
+              <p>Registered operator platform · Private beta</p>
+              <p>HQ — Austin, TX · Theater logistics worldwide</p>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3">
             {LINKS.map((link) => (
@@ -45,8 +50,8 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="flex flex-col gap-2 border-t border-white/10 pt-6 text-[11px] tracking-[0.14em] text-[#83838A] sm:flex-row sm:items-center sm:justify-between">
-          <span>© 2026 STRAFE.LIVE</span>
-          <span>A GENERAL.MANN COMPANY</span>
+          <span>© 2026 STRAFE SYSTEMS LLC</span>
+          <span>STRAFE.LIVE</span>
           <span>ALL RIGHTS RESERVED</span>
         </div>
       </div>

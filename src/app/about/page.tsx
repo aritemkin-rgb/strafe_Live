@@ -29,17 +29,40 @@ export default function AboutPage() {
           The platform is built for remote combat access, live engagement, and
           mission clarity. Your side. Your drone. Your clip.
         </p>
-        <p>
-          Founded by Gen. Norman Mann, STRAFE is opening private beta to the
-          first wave of civilian operators.
-        </p>
       </div>
+
+      <div className="mt-12 rounded-sm border border-white/10 bg-[#0C0C0D] p-6">
+        <p className="font-mono text-[11px] tracking-[0.22em] text-[#EF4444]">
+          COMPANY
+        </p>
+        <h2 className="mt-3 font-display text-2xl text-white">
+          STRAFE SYSTEMS LLC
+        </h2>
+        <div className="mt-4 space-y-3 text-sm text-[#B5B5BB]">
+          <p>A GENERAL.MANN COMPANY</p>
+          <p>
+            Founded by Gen. Norman Mann. Headquartered in Austin, Texas, with
+            theater logistics worldwide.
+          </p>
+          <p>
+            STRAFE.LIVE is the consumer operator network for private-beta
+            civilian access to combat airframes in active theaters.
+          </p>
+        </div>
+      </div>
+
       <div className="mt-10 flex flex-col gap-3 sm:flex-row">
         <Link
           href="/#theaters"
           className="inline-flex items-center justify-center rounded-sm bg-[#EF4444] px-5 py-3 text-xs tracking-[0.16em] text-white"
         >
           CHOOSE YOUR SIDE
+        </Link>
+        <Link
+          href="/careers"
+          className="inline-flex items-center justify-center rounded-sm border border-white/20 px-5 py-3 text-xs tracking-[0.16em] text-white"
+        >
+          CAREERS
         </Link>
         <Link
           href="/"

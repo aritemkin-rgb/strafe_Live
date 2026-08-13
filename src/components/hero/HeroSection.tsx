@@ -14,7 +14,6 @@ export function HeroSection() {
 
     const softLoop = () => {
       if (!video.duration || Number.isNaN(video.duration)) return;
-      // Jump early so the browser never hits a frozen last frame.
       if (video.duration - video.currentTime < 0.18) {
         video.currentTime = 0.01;
         void video.play().catch(() => undefined);
@@ -57,19 +56,19 @@ export function HeroSection() {
       <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20 lg:justify-center lg:px-8 lg:pb-24">
         <div className="max-w-2xl space-y-6">
           <p className="font-mono text-[11px] tracking-[0.28em] text-[#EF4444]">
-            CIVILIAN COMBAT DRONE ACCESS
+            PRIVATE BETA
           </p>
           <h1 className="font-display text-5xl leading-[0.95] text-white sm:text-7xl lg:text-8xl">
             JOIN THE FIGHT
           </h1>
-          <p className="max-w-xl text-base leading-relaxed text-[#F7F7F7] sm:text-xl">
-            Civilians. Combat drones. Active war theaters.
-          </p>
           <div className="space-y-2 text-lg text-[#F7F7F7] sm:text-xl">
             <p>Choose your side.</p>
             <p>Select your gear.</p>
             <p>Get your viral clip.</p>
           </div>
+          <p className="max-w-md text-sm leading-relaxed text-[#B5B5BB] sm:text-base">
+            Civilian access to combat drones in active war theaters.
+          </p>
           <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <a
               href="/#theaters"
@@ -102,9 +101,6 @@ export function HeroSection() {
             </div>
           ))}
         </div>
-        <p className="mt-4 font-mono text-[10px] tracking-[0.2em] text-[#83838A]">
-          FOR CIVILIANS · ACTIVE THEATERS · COMBAT AIRFRAMES
-        </p>
       </div>
     </section>
   );

@@ -25,13 +25,13 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "STRAFE.LIVE — Civilian Combat Drone Access",
+  title: "STRAFE.LIVE — Join the Fight",
   description:
-    "STRAFE.LIVE lets civilians operate combat drones in active war theaters. Choose a side, get an airframe, fly remotely.",
+    "Civilian access to combat drones in active war theaters. Choose your side. Select your gear. Get your viral clip.",
   openGraph: {
     title: "JOIN THE FIGHT",
     description:
-      "Civilian access to combat drones in active war theaters. Choose your side. Deploy your airframe. Fly from anywhere.",
+      "Civilian access to combat drones in active war theaters. Choose your side. Select your gear. Get your viral clip.",
     url: "https://strafe.live",
     siteName: "STRAFE.LIVE",
     type: "website",
