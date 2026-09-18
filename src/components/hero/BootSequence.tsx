@@ -12,7 +12,11 @@ export function BootSequence() {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || sessionStorage.getItem(SESSION_KEY) === "1") {
+    if (
+      reduced ||
+      sessionStorage.getItem(SESSION_KEY) === "1" ||
+      window.location.pathname.startsWith("/demo")
+    ) {
       return;
     }
     setVisible(true);

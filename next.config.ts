@@ -36,6 +36,18 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Threadless Godot 4 Web export — no COOP/COEP. If you turn on
+        // variant/thread_support, add Cross-Origin-Opener-Policy: same-origin
+        // and Cross-Origin-Embedder-Policy: require-corp here and on /demo.
+        source: "/game/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
     ];
   },
 };
