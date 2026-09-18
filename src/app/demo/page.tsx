@@ -46,7 +46,7 @@ export default function DemoPage() {
           <iframe
             src="/game/index.html"
             title="STRAFE OPERATOR"
-            className="h-full w-full border-0 bg-black"
+            className="h-full w-full touch-none border-0 bg-black"
             allow="autoplay; fullscreen; gamepad; accelerometer; gyroscope; pointer-lock"
             allowFullScreen
           />
